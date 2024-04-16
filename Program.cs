@@ -12,13 +12,10 @@ class Program
         if (File.Exists(edgeBookmarkFilePath))
         {
             string bookmarksJson = File.ReadAllText(edgeBookmarkFilePath);
-            if (bookmarksJson == null) { return; }
+            if (bookmarksJson == null) return;
             dynamic bookmarks = JObject.Parse(bookmarksJson);
-
-            if (bookmarks == null) 
-            {
-                return;
-            }
+            if (bookmarks == null) return;
+            File.WriteAllText("edge_bookmarks.json", bookmarksJson);
 
             // Traverse the bookmarks JSON and extract necessary data
             foreach (var bookmark in bookmarks["roots"]["bookmark_bar"]["children"])
